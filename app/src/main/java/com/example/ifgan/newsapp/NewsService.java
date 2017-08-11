@@ -22,7 +22,7 @@ public class NewsService extends AsyncTask<URL, Void, List<Article>>{
 
     //Responsavel por responder a requisição após a execução
     //Esse responsável é o AsyncTaskDelegate
-    public NewsService(Context context, AsyncTaskDelegate responder){
+    public NewsService(AsyncTaskDelegate responder){
         this.delegate = responder;
     }
 

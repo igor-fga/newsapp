@@ -146,19 +146,19 @@ public final class QueryUtils {
 
         try {
             JSONObject baseJsonResponse = new JSONObject(newsJSON);
-            JSONArray itemArray = baseJsonResponse.getJSONArray("response");
+            JSONObject response = baseJsonResponse.getJSONObject("response");
+            JSONArray itemArray = response.getJSONArray("results");
 
             // If there are results in the features array
             for (int i = 0; i < itemArray.length(); i++) {
 
                 // Extract out the first volumeinfo (which is an book)
-                JSONObject firstItem = itemArray.getJSONObject(i);
-                JSONObject resultsInfo = firstItem.getJSONObject("results");
+                JSONObject item = itemArray.getJSONObject(i);
 
                 // Extract out the title, author
-                String section = resultsInfo.optString("sectionName");
-                String title = resultsInfo.optString("webTitle");
-                String url = resultsInfo.optString("webUrl");
+                String section = item.optString("sectionName");
+                String title = item.optString("webTitle");
+                String url = item.optString("webUrl");
 
                 // Create a new {@link Event} object
                 Article article = new Article(section, title, url);
